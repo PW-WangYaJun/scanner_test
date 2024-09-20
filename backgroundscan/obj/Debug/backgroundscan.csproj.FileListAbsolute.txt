@@ -1,0 +1,15 @@
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\bin\Debug\backgroundscan.exe.config
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\bin\Debug\backgroundscan.exe
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\bin\Debug\backgroundscan.pdb
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\bin\Debug\LibUsbDotNet.LibUsbDotNet.dll
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\bin\Debug\LibUsbDotNet.LibUsbDotNet.pdb
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgroundscan.csproj.AssemblyReference.cache
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgroundscan.Form1.resources
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgroundscan.Properties.Resources.resources
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgroundscan.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgroundscan.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgrou.08C681D6.Up2Date
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgroundscan.exe
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\obj\Debug\backgroundscan.pdb
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\bin\Debug\Newtonsoft.Json.dll
+C:\Users\admin\source\repos\backgroundscan\backgroundscan\bin\Debug\Newtonsoft.Json.xml
