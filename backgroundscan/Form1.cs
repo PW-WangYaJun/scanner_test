@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Management;
 using Newtonsoft.Json;
+using HidLibrary;
+using System.IO.Ports;
 
 
 namespace backgroundscan
@@ -29,43 +31,54 @@ namespace backgroundscan
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var vid = Convert.ToInt16("0x05E0", 16);
-            var pid= Convert.ToInt16("0x1200", 16);
-            UsbDeviceFinder usbFinder = new UsbDeviceFinder(vid, pid);
-            UsbDevice usbDevice = UsbDevice.OpenUsbDevice(usbFinder);
-            if (usbDevice == null)
-            {
-                MessageBox.Show("Device not found");
-            }
-            else 
-            {
-                MessageBox.Show("Device found");
-            }
+
+            SerialPort serialPort1 = new SerialPort();
+            SerialPort serialPort2 = new SerialPort();
+            serialPort1.PortName = "COM3";  // 设置串口名称，例如 COM3 (Windows) 或 /dev/ttyUSB0 (Linux)
+            serialPort1.BaudRate = 9600;    // 设置波特率
+            serialPort1.Parity = Parity.None;  // 校验位
+            serialPort1.DataBits = 8;       // 数据位
+            serialPort1.StopBits = StopBits.One; // 停止位
+            serialPort1.Handshake = Handshake.None; // 流控制
             
-            IUsbDevice wholeUsbDevice = usbDevice as IUsbDevice;
-            if (!ReferenceEquals(wholeUsbDevice, null))
-            {
-                // 选择配置并声明接口
-                wholeUsbDevice.SetConfiguration(1);
-                wholeUsbDevice.ClaimInterface(0);  // Interface 0，可能需要根据设备实际配置更改
-            }
-            UsbEndpointReader reader = usbDevice.OpenEndpointReader(ReadEndpointID.Ep01);
+            // 添加 DataReceived 事件处理程序
+            serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler1);
 
-            byte[] readBuffer = new byte[256]; // 根据设备数据包大小定义
-            ErrorCode ec = reader.Read(readBuffer,1000000, out int bytesRead);
+            // 打开串口
+            serialPort1.Open();
 
-            if (ec == ErrorCode.None && bytesRead > 0)
-            {
 
-                string barcodeData = Convert.ToString(readBuffer);
-                MessageBox.Show($"Barcode Data: {barcodeData}");
-            }
-            else
-            {
-                MessageBox.Show("Error reading data: " + ec);
-            }
-            usbDevice.Close();
-            UsbDevice.Exit();
+
+
+
+
+            serialPort2.PortName = "COM4";  // 设置串口名称，例如 COM3 (Windows) 或 /dev/ttyUSB0 (Linux)
+            serialPort2.BaudRate = 9600;    // 设置波特率
+            serialPort2.Parity = Parity.None;  // 校验位
+            serialPort2.DataBits = 8;       // 数据位
+            serialPort2.StopBits = StopBits.One; // 停止位
+            serialPort2.Handshake = Handshake.None; // 流控制
+
+            // 添加 DataReceived 事件处理程序
+            serialPort2.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler2);
+
+            // 打开串口
+            serialPort2.Open();
+
+        }
+
+        // 处理接收到的数据
+        private static void DataReceivedHandler1(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string inData = sp.ReadExisting();  // 读取串口中的所有数据
+            MessageBox.Show($"scanner1: {inData}");
+        }
+        private static void DataReceivedHandler2(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string inData = sp.ReadExisting();  // 读取串口中的所有数据
+            MessageBox.Show($"scanner2: {inData}");
         }
     }
 }
